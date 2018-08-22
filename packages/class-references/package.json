@@ -1,0 +1,11 @@
+{
+  "name": "class-references",
+  "version": "0.0.0-pre",
+  "description": "Add or remove a class using reference counting",
+  "main": "lib/index.js",
+  "author": "Simon Andrews <me@simonandrews.ca>",
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc"
+  }
+}

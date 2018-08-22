@@ -1,0 +1,17 @@
+{
+  "name": "react-class-references",
+  "version": "0.0.0-pre",
+  "description": "Add or remove a class on a non-React element, using reference counting",
+  "main": "lib/index.js",
+  "author": "Simon Andrews <me@simonandrews.ca>",
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc"
+  },
+  "devDependencies": {
+    "react": "^16.4.2"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}

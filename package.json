@@ -1,0 +1,43 @@
+{
+  "name": "class-references",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Simon Andrews <me@simonandrews.ca>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "compile": "lerna run compile",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "@types/react": "^16.4.11",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^23.4.2",
+    "jest": "^23.5.0",
+    "lerna": "^3.1.1",
+    "ts-jest": "^23.1.4",
+    "typescript": "^3.0.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ]
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
