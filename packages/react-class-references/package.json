@@ -8,6 +8,9 @@
   "scripts": {
     "compile": "tsc"
   },
+  "dependencies": {
+    "class-references": "^0.0.0-pre"
+  },
   "devDependencies": {
     "react": "^16.4.2"
   },
