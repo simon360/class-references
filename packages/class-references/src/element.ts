@@ -1,4 +1,4 @@
-import { newObject, ReferenceObject } from "./referenceObject";
+import { IReferenceObject, newObject } from "./referenceObject";
 
 /**
  * Gets a ReferenceObject from an element.
@@ -8,7 +8,7 @@ import { newObject, ReferenceObject } from "./referenceObject";
 export const getClassReferences = (el: HTMLElement) => {
   return ((el.dataset.classReferences &&
     JSON.parse(el.dataset.classReferences)) ||
-    newObject()) as ReferenceObject;
+    newObject()) as IReferenceObject;
 };
 
 /**
@@ -19,7 +19,7 @@ export const getClassReferences = (el: HTMLElement) => {
  */
 export const setClassReferences = (
   el: HTMLElement,
-  classReferences: ReferenceObject
+  classReferences: IReferenceObject
 ) => {
   el.dataset.classReferences = JSON.stringify(classReferences);
 };

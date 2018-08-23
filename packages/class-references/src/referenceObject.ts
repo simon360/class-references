@@ -1,4 +1,4 @@
-interface ClassTokenList {
+interface IClassTokenList {
   [propName: string]: number[];
 }
 
@@ -7,17 +7,17 @@ type ClassTokenListEntry = [string, number[]];
 /**
  * The data structure that is used to store and check references.
  */
-export interface ReferenceObject {
+export interface IReferenceObject {
   readonly lastToken: number;
-  readonly classes: ClassTokenList;
+  readonly classes: IClassTokenList;
 }
 
 /**
  * Create an empty reference object.
  */
-export const newObject = (): ReferenceObject => ({
-  lastToken: 0,
-  classes: {}
+export const newObject = (): IReferenceObject => ({
+  classes: {},
+  lastToken: 0
 });
 
 /**
@@ -28,12 +28,11 @@ export const newObject = (): ReferenceObject => ({
  * @param id the reference id that needs removing
  */
 export const newObjectWithoutReferenceToId = (
-  obj: ReferenceObject,
+  obj: IReferenceObject,
   id: number
-): ReferenceObject => ({
-  lastToken: obj.lastToken || 0,
+): IReferenceObject => ({
   classes: {
-    ...(Object.entries(obj) as [string, number[]][])
+    ...(Object.entries(obj) as ClassTokenListEntry[])
       // Remove old, empty references.
       .filter(([_, values]) => values.length > 0)
       // Remove the requested id.
@@ -45,13 +44,14 @@ export const newObjectWithoutReferenceToId = (
       )
       // Convert back to object from entries
       .reduce(
-        (obj, [key, val]) => ({
-          ...obj,
+        (acc, [key, val]) => ({
+          ...acc,
           [key]: val
         }),
-        {} as ClassTokenList
+        {}
       )
-  }
+  },
+  lastToken: obj.lastToken || 0
 });
 
 /**
@@ -64,12 +64,12 @@ export const newObjectWithoutReferenceToId = (
  * @param className the class name to claim a reference for
  */
 export const newObjectWithReferenceToClass = (
-  obj: ReferenceObject,
+  obj: IReferenceObject,
   className: string
-): ReferenceObject => ({
-  lastToken: obj.lastToken + 1,
+): IReferenceObject => ({
   classes: {
     ...obj.classes,
     [className]: [...(obj.classes[className] || []), obj.lastToken + 1]
-  }
+  },
+  lastToken: obj.lastToken + 1
 });

@@ -1,8 +1,8 @@
+import { getClassReferences, setClassReferences } from "./element";
 import {
   newObjectWithoutReferenceToId,
   newObjectWithReferenceToClass
 } from "./referenceObject";
-import { getClassReferences, setClassReferences } from "./element";
 
 /**
  * Add {className} to {el}, if it wasn't previously added, and return a unique
