@@ -36,13 +36,10 @@ export const release = (el: HTMLElement, token: number) => {
 
   // `newObjectWithoutReferenceToId` won't immediately remove empty lists
   // from `classes`.
-  for (const className of Object.keys(
-    Object.entries(newReferences.classes)
-      .filter(([_, values]) => values.length === 0)
-      .map(([key]) => key)
-  )) {
-    el.classList.remove(className);
-  }
+  const removable = Object.entries(newReferences.classes)
+    .filter(([_, values]) => values.length === 0)
+    .map(([key]) => key);
 
+  el.classList.remove(...removable);
   setClassReferences(el, newReferences);
 };
