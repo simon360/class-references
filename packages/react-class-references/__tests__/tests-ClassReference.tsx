@@ -1,4 +1,4 @@
-describe("referenceObject", () => {
+describe("<ClassReference />", () => {
   test("temporary test", () => {
     return;
   });

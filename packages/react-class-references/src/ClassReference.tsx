@@ -1,24 +1,24 @@
-import * as React from "react";
 import { claimForClass, release } from "class-references";
+import * as React from "react";
 
-interface Props {
+interface IProps {
   children: any;
   classNameToAdd: string;
   element: HTMLElement;
 }
 
-interface State {
+interface IState {
   token: number;
 }
 
-export class ClassReference extends React.Component<Props, State> {
-  componentDidMount() {
+export class ClassReference extends React.Component<IProps, IState> {
+  public componentDidMount() {
     this.setState({
       token: claimForClass(this.props.element, this.props.classNameToAdd)
     });
   }
 
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: IProps) {
     const { classNameToAdd, element } = this.props;
     const { token } = this.state;
 
@@ -36,11 +36,11 @@ export class ClassReference extends React.Component<Props, State> {
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     release(this.props.element, this.state.token);
   }
 
-  render() {
+  public render() {
     return <React.Fragment>{this.props.children}</React.Fragment>;
   }
 }
