@@ -32,7 +32,7 @@ export const newObjectWithoutReferenceToId = (
   id: number
 ): IReferenceObject => ({
   classes: {
-    ...(Object.entries(obj) as ClassTokenListEntry[])
+    ...(Object.entries(obj.classes) as ClassTokenListEntry[])
       // Remove old, empty references.
       .filter(([_, values]) => values.length > 0)
       // Remove the requested id.
