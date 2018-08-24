@@ -5,6 +5,8 @@
   "linterOptions": {
     "exclude": ["**/lib/**"]
   },
-  "rules": {},
+  "rules": {
+    "no-implicit-dependencies": [true, "dev"]
+  },
   "rulesDirectory": []
 }

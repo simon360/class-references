@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`referenceObject newObject() should match snapshot 1`] = `
+Object {
+  "classes": Object {},
+  "lastToken": 0,
+}
+`;
+
+exports[`referenceObject newObjectWithReferenceToClass() should add a new class reference 1`] = `
+Object {
+  "classes": Object {
+    "test-class-name": Array [
+      1,
+    ],
+  },
+  "lastToken": 1,
+}
+`;
+
+exports[`referenceObject newObjectWithReferenceToClass() should add multiple class names 1`] = `
+Object {
+  "classes": Object {
+    "extra-test-class-name": Array [
+      2,
+    ],
+    "test-class-name": Array [
+      1,
+      3,
+    ],
+  },
+  "lastToken": 3,
+}
+`;
+
+exports[`referenceObject newObjectWithReferenceToClass() should add to an existing class reference 1`] = `
+Object {
+  "classes": Object {
+    "test-class-name": Array [
+      1,
+      2,
+    ],
+  },
+  "lastToken": 2,
+}
+`;
+
+exports[`referenceObject newObjectWithoutReferenceToId() should not immediately remove an empty list 1`] = `
+Object {
+  "classes": Object {
+    "test-class-name": Array [],
+  },
+  "lastToken": 1,
+}
+`;
+
+exports[`referenceObject newObjectWithoutReferenceToId() should remove a received empty list 1`] = `
+Object {
+  "classes": Object {},
+  "lastToken": 1,
+}
+`;
