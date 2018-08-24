@@ -11,7 +11,7 @@ interface IState {
   token: number;
 }
 
-export class ClassReference extends React.Component<IProps, IState> {
+export default class ClassReference extends React.Component<IProps, IState> {
   public componentDidMount() {
     this.setState({
       token: claimForClass(this.props.element, this.props.classNameToAdd)
