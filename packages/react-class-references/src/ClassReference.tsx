@@ -26,9 +26,7 @@ export default class ClassReference extends React.Component<IProps, IState> {
       prevProps.element !== element ||
       prevProps.classNameToAdd !== classNameToAdd
     ) {
-      if (token) {
-        release(prevProps.element, token);
-      }
+      release(prevProps.element, token);
 
       this.setState({
         token: claimForClass(element, classNameToAdd)
