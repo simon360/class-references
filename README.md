@@ -1,91 +1,30 @@
-# class-references
+# Class References
 
-This project has not been released yet, and is in a WIP state.
+[![CircleCI](https://img.shields.io/circleci/project/github/simon360/class-references.svg)](https://circleci.com/gh/simon360/class-references)
+[![codecov](https://img.shields.io/codecov/c/github/simon360/class-references.svg)](https://codecov.io/gh/simon360/class-references)
+![npm](https://img.shields.io/npm/v/class-references.svg)
+![GitHub](https://img.shields.io/github/license/simon360/class-references.svg)
 
-> Wrangle class names on HTML elements with reference counting.
+> Stop worrying about edge cases when you add and remove classes.
 
-Manage the classes you add on external elements more effectively.
+## Why?
 
-## Problem
+Class names on global elements can come from a lot of places. Knowing when a class is actually _safe_ to remove can be tricky.
 
-Sometimes, you need to add a class to `<body>`, in order to display your component correctly. Maybe you have a utility class `u-preventScroll` that sets `overflow: hidden;`, so that the content you're showing prevents scrolling on what's behind it.
+Say you have a modal dialog component. When that component is shown, you might want to stop the user from scrolling the content behind the dialog. To do that, you add a class called `u-preventScroll` (with corresponding CSS that sets `overflow: hidden;`) to the `body` element. When the dialog closes, you remove the class. Hey, that works great!
 
-You can call `document.body.classList.add("u-preventScroll)`, but what if multiple components try to add that class at the same time, but Component 1 removes the class before Component 2 is ready for the class to go away?
+Except when it doesn't. What if you had two dialog components open at the same time? When the second one closes, it removes `u-preventScroll`, but the first dialog is still open. And now your users can scroll the page.
 
-## Solution
+Enter `class-references`. Rather than adding a class name to an element directly, a component can exchange a request to add a class name for a token from `class-references`. When a component is ready to remove that class, the component can release the token. The class only gets removed when all tokens have been released.
 
-Reference counting offers a solution to this problem. Component 1 and Component 2 can each request that the class be added, and receive a unique receipt, or a token, that represents their request. When Component 1 is finished with the class, it releases its token. Since Component 2 still holds a token, the class isn't removed until Component 2 also releases it.
+Put more simply: you can stop worrying about edge cases when you're adding and removing class names to global elements.
 
 ## Usage
 
-### Without a framework
+### Framework agnostic
 
-#### Installation
-
-Installation is not yet available.
-
-#### Example
-
-```js
-import { claimForClass, release } from "class-references";
-
-const className = "u-preventScroll";
-const element = document.body;
-
-const token1 = claimForClass(element, className); // Class is added
-const token2 = claimForClass(element, className); // Class was already added, but token reserves it.
-
-release(element, token1); // token1 is released; token2 not released, class remains
-release(element, token2); // both tokens are released, class removed
-```
+See [`class-references`](packages/class-references/README.md).
 
 ### React
 
-#### Overview
-
-Use a `<ClassReference />` component any time you're showing content that requires a class be added to an external (ie. non-React) element.
-
-#### Installation
-
-Installation is not yet available.
-
-#### Example
-
-```js
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import ClassReference from "react-class-references";
-import Modal from "./components/Modal"; // a modal dialog that you defined
-
-class MyPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalOpen: false
-    };
-  }
-
-  render() {
-    const { modalOpen } = this.state;
-
-    return (
-      <React.Fragment>
-        <button onClick={() => this.setState({ modalOpen: !modalOpen })}>
-          Toggle modal
-        </button>
-
-        {/* u-preventScroll will only exist on document.body if modalOpen is truthy. */}
-        {modalOpen ? (
-          <ClassReference element={document.body} classToAdd="u-preventScroll">
-            <Modal>Hello, world!</Modal>
-          </ClassReference>
-        ) : null}
-      </React.Fragment>
-    );
-  }
-}
-
-// Class is added to `document.body` when `ClassReference` mounts
-ReactDOM.render(<MyPage />, document.getElementById("root"));
-```
+See [`react-class-references`](packages/react-class-references/README.md).
