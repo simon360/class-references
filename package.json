@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "compile": "lerna run compile",
+    "postinstall": "npm-run-all compile",
     "lint": "npm-run-all lint:*",
     "lint:ts": "tslint -c tslint.json './packages/**/*.ts*(x)'",
     "test": "jest"
