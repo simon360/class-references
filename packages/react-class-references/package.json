@@ -12,7 +12,9 @@
     "class-references": "^0.0.0-pre"
   },
   "devDependencies": {
-    "react": "^16.4.2"
+    "@types/react-test-renderer": "^16.0.2",
+    "react": "^16.4.2",
+    "react-test-renderer": "^16.4.2"
   },
   "peerDependencies": {
     "react": "16.x"
