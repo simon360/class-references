@@ -1,6 +1,6 @@
 {
   "name": "class-references",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Add or remove a class using reference counting",
   "main": "lib/index.js",
   "author": "Simon Andrews <me@simonandrews.ca>",
