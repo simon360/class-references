@@ -4,7 +4,7 @@
 [![codecov](https://img.shields.io/codecov/c/github/simon360/class-references.svg)](https://codecov.io/gh/simon360/class-references)
 ![npm](https://img.shields.io/npm/v/class-references.svg)
 ![GitHub](https://img.shields.io/github/license/simon360/class-references.svg)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/) [![Greenkeeper badge](https://badges.greenkeeper.io/simon360/class-references.svg)](https://greenkeeper.io/)
 
 > Stop worrying about edge cases when you add and remove classes.
 

@@ -15,7 +15,10 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
-      - run: yarn install --frozen-lockfile
+      - run: sudo yarn global add greenkeeper-lockfile@2
+      - run: greenkeeper-lockfile-update
+      - run: yarn install
+      - run: greenkeeper-lockfile-upload
       - save_cache:
           paths:
             - node_modules
