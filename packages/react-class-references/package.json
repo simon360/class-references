@@ -1,6 +1,6 @@
 {
   "name": "react-class-references",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Add or remove a class on a non-React element, using reference counting",
   "main": "lib/index.js",
   "author": "Simon Andrews <me@simonandrews.ca>",
@@ -9,7 +9,7 @@
     "compile": "tsc"
   },
   "dependencies": {
-    "class-references": "^0.0.4"
+    "class-references": "^0.1.0"
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.0.2",
