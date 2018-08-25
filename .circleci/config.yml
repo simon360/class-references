@@ -28,8 +28,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/repo/.npmrc
-      - run: ./node_modules/.bin/lerna publish from-git
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - run: ./node_modules/.bin/lerna publish from-git --yes
   lint:
     <<: *defaults
     steps:
@@ -48,13 +48,22 @@ workflows:
   version: 2
   build_test_deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
       - test:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
       - lint:
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
       - deploy_packages:
           requires:
             - build
