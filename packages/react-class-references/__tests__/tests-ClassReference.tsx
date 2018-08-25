@@ -1,4 +1,4 @@
-import { claimForClass, release } from "class-references";
+import { releaseToken, requestTokenForClass } from "class-references";
 import * as React from "react";
 import * as TestRenderer from "react-test-renderer";
 import ClassReference from "../src/ClassReference";
@@ -14,7 +14,7 @@ describe("<ClassReference />", () => {
     element = document.createElement("div");
     jest.resetAllMocks();
 
-    (claimForClass as any).mockReturnValue(fakeToken);
+    (requestTokenForClass as any).mockReturnValue(fakeToken);
   });
 
   it("should match default snapshot", () => {
@@ -34,7 +34,7 @@ describe("<ClassReference />", () => {
       </ClassReference>
     );
 
-    expect(claimForClass).toHaveBeenCalledWith(element, testClassName);
+    expect(requestTokenForClass).toHaveBeenCalledWith(element, testClassName);
   });
 
   it("should release on unmount", () => {
@@ -46,7 +46,7 @@ describe("<ClassReference />", () => {
 
     renderer.unmount();
 
-    expect(release).toHaveBeenCalledWith(element, fakeToken);
+    expect(releaseToken).toHaveBeenCalledWith(element, fakeToken);
   });
 
   it("should release and claim on element swap", () => {
@@ -62,8 +62,11 @@ describe("<ClassReference />", () => {
 
     renderer.update(<Test testElement={extraElement} />);
 
-    expect(release).toHaveBeenCalledWith(element, fakeToken);
-    expect(claimForClass).toHaveBeenCalledWith(extraElement, testClassName);
+    expect(releaseToken).toHaveBeenCalledWith(element, fakeToken);
+    expect(requestTokenForClass).toHaveBeenCalledWith(
+      extraElement,
+      testClassName
+    );
   });
 
   it("should release and claim on class swap", () => {
@@ -81,7 +84,7 @@ describe("<ClassReference />", () => {
 
     renderer.update(<Test classNameToAdd={extraClassName} />);
 
-    expect(release).toHaveBeenCalledWith(element, fakeToken);
-    expect(claimForClass).toHaveBeenCalledWith(element, extraClassName);
+    expect(releaseToken).toHaveBeenCalledWith(element, fakeToken);
+    expect(requestTokenForClass).toHaveBeenCalledWith(element, extraClassName);
   });
 });
