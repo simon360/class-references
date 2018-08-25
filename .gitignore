@@ -16,3 +16,6 @@ node_modules/
 
 # Build artifacts
 lib
+
+# macOS system files
+.DS_Store
