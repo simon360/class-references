@@ -1,7 +1,7 @@
 import { getClassReferences } from "../src/element";
-import { claimForClass, release } from "../src/index";
+import { releaseToken, requestTokenForClass } from "../src/index";
 import {
-  newObjectWithoutReferenceToId,
+  newObjectWithoutReferenceToToken,
   newObjectWithReferenceToClass
 } from "../src/referenceObject";
 
@@ -20,14 +20,14 @@ describe("index", () => {
   beforeEach(() => {
     (getClassReferences as any).mockReturnValue(fakeReferences);
     (newObjectWithReferenceToClass as any).mockReturnValue(fakeReferences);
-    (newObjectWithoutReferenceToId as any).mockReturnValue(fakeReferences);
+    (newObjectWithoutReferenceToToken as any).mockReturnValue(fakeReferences);
 
     element = document.createElement("div");
   });
 
   describe("claimForClass()", () => {
     it("should add the class to the element's class list", () => {
-      claimForClass(element, testClassName);
+      requestTokenForClass(element, testClassName);
 
       expect(element.classList.contains(testClassName)).toBe(true);
     });
@@ -39,13 +39,13 @@ describe("index", () => {
         lastToken: token
       });
 
-      expect(claimForClass(element, testClassName)).toBe(token);
+      expect(requestTokenForClass(element, testClassName)).toBe(token);
     });
   });
 
   describe("release()", () => {
     it("should remove classes when all tokens are released", () => {
-      (newObjectWithoutReferenceToId as any).mockReturnValue({
+      (newObjectWithoutReferenceToToken as any).mockReturnValue({
         classes: {
           [testClassName]: []
         },
@@ -54,13 +54,13 @@ describe("index", () => {
 
       element.classList.add(testClassName);
 
-      release(element, 142); // actual token is irrelevant; mock takes care of it
+      releaseToken(element, 142); // actual token is irrelevant; mock takes care of it
 
       expect(element.classList.contains(testClassName)).toBe(false);
     });
 
     it("should not remove classes where tokens remain", () => {
-      (newObjectWithoutReferenceToId as any).mockReturnValue({
+      (newObjectWithoutReferenceToToken as any).mockReturnValue({
         classes: {
           [testClassName]: [3, 8]
         },
@@ -69,7 +69,7 @@ describe("index", () => {
 
       element.classList.add(testClassName);
 
-      release(element, 142); // actual token is irrelevant; mock takes care of it
+      releaseToken(element, 142); // actual token is irrelevant; mock takes care of it
 
       expect(element.classList.contains(testClassName)).toBe(true);
     });

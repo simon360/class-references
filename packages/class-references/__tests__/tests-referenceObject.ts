@@ -1,6 +1,6 @@
 import {
   newObject,
-  newObjectWithoutReferenceToId,
+  newObjectWithoutReferenceToToken,
   newObjectWithReferenceToClass
 } from "../src/referenceObject";
 
@@ -46,7 +46,7 @@ describe("referenceObject", () => {
   describe("newObjectWithoutReferenceToId()", () => {
     it("should not change an empty object", () => {
       const obj = newObject();
-      const objRemoved = newObjectWithoutReferenceToId(obj, 0);
+      const objRemoved = newObjectWithoutReferenceToToken(obj, 0);
 
       expect(objRemoved).toEqual(obj);
     });
@@ -56,7 +56,7 @@ describe("referenceObject", () => {
 
       obj = newObjectWithReferenceToClass(obj, testClassName);
 
-      const objRemoved = newObjectWithoutReferenceToId(obj, 14);
+      const objRemoved = newObjectWithoutReferenceToToken(obj, 14);
 
       expect(objRemoved).toEqual(obj);
     });
@@ -65,7 +65,7 @@ describe("referenceObject", () => {
       let obj = newObject();
 
       obj = newObjectWithReferenceToClass(obj, testClassName);
-      obj = newObjectWithoutReferenceToId(obj, obj.lastToken);
+      obj = newObjectWithoutReferenceToToken(obj, obj.lastToken);
 
       expect(obj).toMatchSnapshot();
     });
@@ -74,8 +74,8 @@ describe("referenceObject", () => {
       let obj = newObject();
 
       obj = newObjectWithReferenceToClass(obj, testClassName);
-      obj = newObjectWithoutReferenceToId(obj, obj.lastToken);
-      obj = newObjectWithoutReferenceToId(obj, obj.lastToken); // Call again to prune empties
+      obj = newObjectWithoutReferenceToToken(obj, obj.lastToken);
+      obj = newObjectWithoutReferenceToToken(obj, obj.lastToken); // Call again to prune empties
 
       expect(obj).toMatchSnapshot();
     });
@@ -96,7 +96,7 @@ describe("referenceObject", () => {
       let objRemoved = { ...obj };
 
       for (const token of removableTokens) {
-        objRemoved = newObjectWithoutReferenceToId(objRemoved, token);
+        objRemoved = newObjectWithoutReferenceToToken(objRemoved, token);
       }
 
       expect(obj.classes[extraTestClassName]).toEqual(
