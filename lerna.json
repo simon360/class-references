@@ -2,8 +2,7 @@
   "command": {
     "publish": {
       "allowBranch": "release/*",
-      "conventionalCommits": true,
-      "push": false
+      "conventionalCommits": true
     }
   },
   "packages": [
