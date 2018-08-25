@@ -1,6 +1,11 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "command": {
+    "publish": {
+      "allowBranch": "release/*",
+      "conventionalCommits": true,
+      "push": false
+    }
+  },
+  "packages": ["packages/*"],
   "version": "0.0.2"
 }
