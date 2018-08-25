@@ -1,4 +1,4 @@
-import { claimForClass, release } from "class-references";
+import { releaseToken, requestTokenForClass } from "class-references";
 import * as React from "react";
 
 interface IProps {
@@ -14,7 +14,7 @@ interface IState {
 export default class ClassReference extends React.Component<IProps, IState> {
   public componentDidMount() {
     this.setState({
-      token: claimForClass(this.props.element, this.props.classNameToAdd)
+      token: requestTokenForClass(this.props.element, this.props.classNameToAdd)
     });
   }
 
@@ -26,16 +26,16 @@ export default class ClassReference extends React.Component<IProps, IState> {
       prevProps.element !== element ||
       prevProps.classNameToAdd !== classNameToAdd
     ) {
-      release(prevProps.element, token);
+      releaseToken(prevProps.element, token);
 
       this.setState({
-        token: claimForClass(element, classNameToAdd)
+        token: requestTokenForClass(element, classNameToAdd)
       });
     }
   }
 
   public componentWillUnmount() {
-    release(this.props.element, this.state.token);
+    releaseToken(this.props.element, this.state.token);
   }
 
   public render() {

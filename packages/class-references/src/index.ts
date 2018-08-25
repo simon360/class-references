@@ -1,6 +1,6 @@
 import { getClassReferences, setClassReferences } from "./element";
 import {
-  newObjectWithoutReferenceToId,
+  newObjectWithoutReferenceToToken,
   newObjectWithReferenceToClass
 } from "./referenceObject";
 
@@ -11,7 +11,7 @@ import {
  * @param el the element to add a class to
  * @param className the class to add
  */
-export const claimForClass = (el: HTMLElement, className: string) => {
+export const requestTokenForClass = (el: HTMLElement, className: string) => {
   const newReferences = newObjectWithReferenceToClass(
     getClassReferences(el),
     className
@@ -24,12 +24,14 @@ export const claimForClass = (el: HTMLElement, className: string) => {
 };
 
 /**
+ * Release a previously claimed token. Removes the associated class name if all
+ * the tokens have been released.
  *
  * @param el the element to release a reference on
  * @param token the token to release
  */
-export const release = (el: HTMLElement, token: number) => {
-  const newReferences = newObjectWithoutReferenceToId(
+export const releaseToken = (el: HTMLElement, token: number) => {
+  const newReferences = newObjectWithoutReferenceToToken(
     getClassReferences(el),
     token
   );

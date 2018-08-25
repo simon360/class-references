@@ -21,15 +21,15 @@ export const newObject = (): IReferenceObject => ({
 });
 
 /**
- * Create a new reference object by removing the id from the provided reference
- * object.
+ * Create a new reference object by removing the token from the provided
+ * reference object.
  *
  * @param obj a previous reference object
- * @param id the reference id that needs removing
+ * @param token the reference id that needs removing
  */
-export const newObjectWithoutReferenceToId = (
+export const newObjectWithoutReferenceToToken = (
   obj: IReferenceObject,
-  id: number
+  token: number
 ): IReferenceObject => ({
   classes: {
     ...(Object.entries(obj.classes) as ClassTokenListEntry[])
@@ -39,7 +39,7 @@ export const newObjectWithoutReferenceToId = (
       .map(
         ([key, values]): ClassTokenListEntry => [
           key,
-          values.filter(v => v !== id)
+          values.filter(v => v !== token)
         ]
       )
       // Convert back to object from entries
