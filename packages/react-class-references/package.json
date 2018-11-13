@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/react-test-renderer": "^16.0.2",
-    "react": "^16.5.0",
+    "react": "^16.6.3",
     "react-test-renderer": "^16.5.0"
   },
   "peerDependencies": {
